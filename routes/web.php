@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,20 +9,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
  return view('welcome');
 });
-
     /*
     グループ化することで、何度もadmin/news...,admin/Profile...と書かなくてすむ
-    何か変更が会った時も、最初のprefixの部分だけ変更すればOK
+    何か変更があった時も、最初のprefixの部分だけ変更すればOK
     */
     
 Route::group(['prefix' => 'admin'],function(){
-    Route::get('news/create','Admin\NewsController@add');
     Route::get('profile/create','Admin\ProfileController@add');
     Route::get('profile/edit','Admin\ProfileController@edit');
+    Route::get('news/create','Admin\NewsController@add')->middleware('auth');
+    
 });
     
     
@@ -32,5 +30,10 @@ AAAControllerのbbbというAction に渡すRoutingの設定
 */
     Route::get('XXX','AAAController@bbb');
 
+//下記を追記したらエラー解消    
+Auth::routes();
 
+//勝手にできてた
+Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
