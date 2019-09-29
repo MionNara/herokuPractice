@@ -33,7 +33,7 @@ AAAControllerのbbbというAction に渡すRoutingの設定
 //下記を追記したらエラー解消    
 Auth::routes();
 
-//勝手にできてた
+//↓勝手に追加されていた　
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
