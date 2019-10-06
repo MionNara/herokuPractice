@@ -12,5 +12,14 @@ class NewsController extends Controller
     {
         return view('admin.news.create');
     }
+    
+    //PHP13 以下を追記
+    public function create(Request $request)
+    {
+        // admin/news/createへリダイレクト
+        return redirect('admin/news/create');
+    }
+
 }
+
 

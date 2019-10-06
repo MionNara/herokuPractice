@@ -17,11 +17,13 @@ Route::get('/', function () {
     何か変更があった時も、最初のprefixの部分だけ変更すればOK
     */
     
-Route::group(['prefix' => 'admin'],function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('profile/create','Admin\ProfileController@add')->middleware('auth');
     Route::get('profile/edit','Admin\ProfileController@edit')->middleware('auth');
     Route::get('news/create','Admin\NewsController@add')->middleware('auth');
-    
+    //PHP13追記
+    Route::post('news/create', 'Admin\NewsController@create');
+    Route::post('profile/create', 'Admin\ProfileController@create');
 });
     
     
@@ -37,3 +39,5 @@ Auth::routes();
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
