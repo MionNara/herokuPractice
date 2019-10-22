@@ -37,3 +37,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 }
+
+/*User::create([
+    'name' =>"奈良",
+    'email' =>"rorschachmn@gmail.com",
+    'password' => Hash::make("pass"),
+    ]);
+    
+*/

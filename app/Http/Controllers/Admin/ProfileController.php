@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 //Profile.php Modelを扱えるように追記
-use App\Profiles;
+use App\Profile;
 
 
 class ProfileController extends Controller
@@ -21,9 +21,9 @@ class ProfileController extends Controller
     public function create(Request $request)
     {
         
-        $this->validate($request,Profiles::$rules);
+        $this->validate($request,Profile::$rules);
         
-        $profile = new Profiles;
+        $profile = new Profile;
         $form = $request->all();
         
         unset($form['_token']);

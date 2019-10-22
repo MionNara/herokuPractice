@@ -18,6 +18,7 @@ class NewsController extends Controller
     }
     
     //PHP13 以下を追記　createアクション
+    //このRequestクラスはブラウザを通してユーザーから送られる情報を全て含んでいるオブジェクトを取得できる
     public function create(Request $request)
     {
         
@@ -48,7 +49,19 @@ class NewsController extends Controller
         // admin/news/createへリダイレクト
         return redirect('admin/news/create');
     }
-
+    
+    public function index(Request $request)
+    {
+        $cond_title = $request->cond_title;
+        if ($cond_title != '') {
+            //検索されたら検索結果を取得する
+            $posts = News::where('title', $cond_title)->get();
+        }else{
+            //それ以外は全てのニュースを取得する
+            $post = News::all();
+        }
+        return view('admin.news.index', ['post' => $posts, 'cond_title' -> $cond_title]);
+    }
 }
 
 

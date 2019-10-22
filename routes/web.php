@@ -24,7 +24,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     //PHP13追記
     Route::post('news/create', 'Admin\NewsController@create');
     Route::post('profile/create', 'Admin\ProfileController@create');
-    Route::post('profile/edit' , 'Admin\ProfileController@update Action');
+    Route::post('profile/edit' , 'Admin\ProfileController@update');
 });
     
     
