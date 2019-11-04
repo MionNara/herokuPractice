@@ -66,7 +66,7 @@ class NewsController extends Controller
             $posts = News::where('title', $cond_title)->get();
         }else{
             //それ以外は全てのニュースを取得する
-            //Newsモデルを使い、DBに保存されているNewsテーブルのレコードを全て取得し変数$postsに代入
+            //Newsモデルを使い、DBに保存されているNewsテーブルのレコードを全て���得し変数$postsに代入
             $posts = News::all();
         }
         
@@ -74,6 +74,40 @@ class NewsController extends Controller
         //index.blade.phpに$postsと$cond_titleを渡してページを開く
         return view('admin.news.index', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
+    
+    //PHP16追記
+    public function edit(Request $request)
+    {
+        //News Modelからデータを取得
+        $news = News::find($request->id);
+        if (empty($news)) {
+            abort(404);
+        }
+        return view('admin.news.edit', ['news_form' => $news]);
+    }
+    
+    public function update(Request $request)
+    {
+        //Validationをかける
+        $this->validate($request, News::$rules);
+        //News Modelからデータを取得する
+        $news = News::find($request->id);
+        //送信されてきたフォームデータを格納する（画像もあることを忘れずに）
+        $news_form = $request->all();
+        if (isset($news_form['image'])) {
+            $path = $request->file('image')->store('public/image');
+            $news->image_path = basename($path);
+            unset($news_form['image']);
+        } elseif (isset($request->remove)) {
+            $news->image_path = null;
+            unset($news_form['remove']);
+        }
+        unset($news_form['_token']);
+        
+        //該当するデータを上書きして保存する
+        $news->file($news_form)->save();
+        
+        return redirect('admin/news');
+    }
 }
-
 

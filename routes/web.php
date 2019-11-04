@@ -18,14 +18,16 @@ Route::get('/', function () {
     */
     
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-    Route::get('profile/create','Admin\ProfileController@add')->middleware('auth');
-    Route::get('profile/edit','Admin\ProfileController@edit')->middleware('auth');
     Route::get('news/create','Admin\NewsController@add')->middleware('auth');
     //PHP13追記
     Route::post('news/create','Admin\NewsController@create')->middleware('auth');
     Route::get('news','Admin\NewsController@index')->middleware('auth');
+    Route::ger('news/edit', 'Admin\NewsController@edit')->middleware('auth');//PHP16追記
+    Route::post('news/edit', 'Admin\NewsController@edit')->middleware('auth');//PHP16追記
     Route::post('profile/create', 'Admin\ProfileController@create');
     Route::post('profile/edit' , 'Admin\ProfileController@update');
+    Route::get('profile/create','Admin\ProfileController@add')->middleware('auth');
+    Route::get('profile/edit','Admin\ProfileController@edit')->middleware('auth');
 });
     
     
