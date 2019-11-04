@@ -105,7 +105,7 @@ class NewsController extends Controller
         unset($news_form['_token']);
         
         //該当するデータを上書きして保存する
-        $news->file($news_form)->save();
+        $news->fill($news_form)->save();
         
         return redirect('admin/news');
     }
