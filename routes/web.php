@@ -22,8 +22,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     //PHP13追記
     Route::post('news/create','Admin\NewsController@create')->middleware('auth');
     Route::get('news','Admin\NewsController@index')->middleware('auth');
-    Route::ger('news/edit', 'Admin\NewsController@edit')->middleware('auth');//PHP16追記
-    Route::post('news/edit', 'Admin\NewsController@edit')->middleware('auth');//PHP16追記
+    Route::get('news/edit', 'Admin\NewsController@edit')->middleware('auth');//PHP16追記
+    Route::post('news/edit', 'Admin\NewsController@update')->middleware('auth');//PHP16追記
     Route::post('profile/create', 'Admin\ProfileController@create');
     Route::post('profile/edit' , 'Admin\ProfileController@update');
     Route::get('profile/create','Admin\ProfileController@add')->middleware('auth');

@@ -45,7 +45,7 @@
                                     <td>{{ \Str::limit($news->body, 250) }}</td>
                                     <td>
                                         <div>
-                                            <a hred="{{ action('Admin\NewsController@edit', ['id => $news->id]) }}">編集</a> 
+                                            <a href="{{ action('Admin\NewsController@edit', ['id' => $news->id]) }}">編集</a> 
                                         </div>
                                     </td>
                                 </tr>
