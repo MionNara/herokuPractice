@@ -34,15 +34,41 @@ class ProfileController extends Controller
         return redirect('admin/profile/create');
     }
     
-    public function edit( )
+    public function index(Request $request)
     {
-        return view('admin.profile.edit');
+        $cond_title = $request->cond_title;
+        if ($cond_title != '') {
+            $posts = Profile::where('title', $cond_title)->get();
+        }else{
+            $posts = News::all();
+        }
+        return view('admin.news.index', ['posts' =>$posts, 'cond_title' => $cond_title]);
     }
     
-    public function update( )
+    public function edit(Request $request)
     {
-        return redirect('admin/profile/edit');
+        $profile = Profile::find($request->id);
+        if (empty($plofile)) {
+            abort(404);
+        }
+        return view('admin.profile.edit', ['plofile_form' => $plofile]);
     }
     
-    //add やcreateというのがaction
+    public function update(Request $request)
+    {
+        $this->validate($request, Plofile::$rules);
+        $plofile = Plofile::find($request->id);
+        $plofile_form = $request->all();
+        unset($plofile_form['_token']);
+        $plofile->fill($plofile_form)->save();
+        
+        return redirect('admin/profile');
+    }
+    
+    public function delete(Request $request)
+    {
+        $plofile = Plofile::find($request->id);
+        $plofile->delete();
+        return redirect('admin/plofile/');
+    }
 }

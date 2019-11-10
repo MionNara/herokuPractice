@@ -66,7 +66,7 @@ class NewsController extends Controller
             $posts = News::where('title', $cond_title)->get();
         }else{
             //それ以外は全てのニュースを取得する
-            //Newsモデルを使い、DBに保存されているNewsテーブルのレコードを全て���得し変数$postsに代入
+            //Newsモデルを使い、DBに保存されているNewsテーブルのレコードを全て取得し変数$postsに代入
             $posts = News::all();
         }
         
@@ -108,6 +108,17 @@ class NewsController extends Controller
         $news->fill($news_form)->save();
         
         return redirect('admin/news');
+    }
+    
+    
+    //データの削除
+    public function delete(Request $request)
+    {
+        //該当するNews Modelを取得
+        $news = News::find($request->id);
+        //削除 deleteメソッドを使用
+        $news->delete();
+        return redirect('admin/news/');
     }
 }
 
