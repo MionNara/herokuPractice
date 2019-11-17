@@ -23,13 +23,13 @@ class ProfileController extends Controller
         
         $this->validate($request,Profile::$rules);
         
-        $profiles = new Profile;
+        $profile = new Profile;
         $form = $request->all();
         
         unset($form['_token']);
         
-        $profiles->fill($form);
-        $profiles->save();
+        $profile->fill($form);
+        $profile->save();
         
         return redirect('admin/profile/create');
     }
@@ -46,20 +46,20 @@ class ProfileController extends Controller
     
     public function edit(Request $request)
     {
-        $profiles = Profile::find($request->id);
-        if (empty($plofiles)) {
+        $profile = Profile::find($request->id);
+        if (empty($plofile)) {
             abort(404);
         }
-        return view('admin.profile.edit', ['plofile_form' => $plofiles]);
+        return view('admin.profile.edit', ['plofile_form' => $plofile]);
     }
     
     public function update(Request $request)
     {
         $this->validate($request, Plofile::$rules);
-        $plofiles = Plofile::find($request->id);
-        $plofiles_form = $request->all();
-        unset($plofiles_form['_token']);
-        $plofiles->fill($plofiles_form)->save();
+        $plofile = Plofile::find($request->id);
+        $plofile_form = $request->all();
+        unset($plofile_form['_token']);
+        $plofile->fill($plofile_form)->save();
         
         return redirect('admin/profile');
     }
