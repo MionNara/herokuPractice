@@ -66,7 +66,7 @@ class NewsController extends Controller
             $posts = News::where('title', $cond_title)->get();
         }else{
             //それ以外は全てのニュースを取得する
-            //Newsモデルを使い、DBに保存されているNewsテーブルのレコードを全て取得し変数$postsに代入
+            //Newsモデルを使い、DBに保存されているNewsテーブルのレコードを全て���得し変数$postsに代入
             $posts = News::all();
         }
         

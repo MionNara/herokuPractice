@@ -21,13 +21,32 @@
                     <div class="form-group row">
                         <label class="col-md-2" for="name">名前</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="name" value="{{ $plofile_form->name }}">
+                            <input type="text" class="form-control" name="name" value="{{ $plofiles_form->name }}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-10" for="gender">性別</label>
+                        <label class="col-md-2" for="gender">性別</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="gender" value="{{ $plofile_form->gender }}">
+                            <input type="text" class="form-control" name="gender" value="{{ $plofiles_form->gender }}">
+                        </div>
+                    </div>
+                    <div class="form-group-row">
+                        <label class="col-md-2" for="image">趣味</label>
+                        <div class="col-md-10">
+                            <input type="file" class="form-control-file" name="hobby">
+                        </div>
+                    </div>
+                    <div class="from-group row">
+                        <label class="col-md-2" for="body">自己紹介</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="introduction" rows="20">{{ $profiles_form->introduction }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <input type="hidden" name="id" value="{{ $plofiles_form->id }}">
+                            {{ csrf_field() }}
+                            <input type="submit" class="btn btn-primary" valie="更新">
                         </div>
                     </div>
                 </form>
