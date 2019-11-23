@@ -47,27 +47,27 @@ class ProfileController extends Controller
     public function edit(Request $request)
     {
         $profile = Profile::find($request->id);
-        if (empty($plofile)) {
+        if (empty($profile)) {
             abort(404);
         }
-        return view('admin.profile.edit', ['plofile_form' => $plofile]);
+        return view('admin.profile.edit', ['profile_form' => $profile]);
     }
     
     public function update(Request $request)
     {
-        $this->validate($request, Plofile::$rules);
-        $plofile = Plofile::find($request->id);
-        $plofile_form = $request->all();
-        unset($plofile_form['_token']);
-        $plofile->fill($plofile_form)->save();
+        $this->validate($request, Profile::$rules);
+        $profile = Profile::find($request->id);
+        $profileofile_form = $request->all();
+        unset($profileofile_form['_token']);
+        $profile->fill($profileofile_form)->save();
         
         return redirect('admin/profile');
     }
     
     public function delete(Request $request)
     {
-        $plofile = Plofile::find($request->id);
-        $plofile->delete();
-        return redirect('admin/plofile/');
+        $profile = Profile::find($request->id);
+        $profile->delete();
+        return redirect('admin/profile/');
     }
 }
