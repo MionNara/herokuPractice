@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 //Profile.php Modelを扱えるように追記
 use App\Profile;
 
+//PHP17追記
+use App\ProfileHistory;
+use Carbon\Carbon;
+
+
 
 class ProfileController extends Controller
 {
@@ -41,7 +46,7 @@ class ProfileController extends Controller
         }else{
             $posts = Profile::all();
         }
-        return view('admin.news.index', ['posts' =>$posts, 'cond_name' => $cond_name]);
+        return view('admin.profile.index', ['posts' =>$posts, 'cond_name' => $cond_name]);
     }
     
     public function edit(Request $request)
@@ -57,17 +62,23 @@ class ProfileController extends Controller
     {
         $this->validate($request, Profile::$rules);
         $profile = Profile::find($request->id);
-        $profileofile_form = $request->all();
-        unset($profileofile_form['_token']);
-        $profile->fill($profileofile_form)->save();
+        $profile_form = $request->all();
+        unset($profile_form['_token']);
+        $profile->fill($profile_form)->save();
         
-        return redirect('admin/profile');
+        //PHP17 追記
+        $profilehistory = new ProfileHistory;
+        $profilehistory->profile_id = $profile->id;
+        $profilehistory->edited_at = Carbon::now();
+        $profilehistory->save();
+        
+        return redirect('admin/profile/create');
     }
     
     public function delete(Request $request)
     {
         $profile = Profile::find($request->id);
         $profile->delete();
-        return redirect('admin/profile/');
+        return redirect('admin/profile/create');
     }
 }

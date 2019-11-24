@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 
 //PHP14 以下を追記　News Modelが扱えるようになる
 use App\News;
+//PHP17追記　History Modelも
+use App\History;
+
+use Carbon\Carbon;
 
 
 class NewsController extends Controller
@@ -106,6 +110,13 @@ class NewsController extends Controller
         
         //該当するデータを上書きして保存する
         $news->fill($news_form)->save();
+        
+        //PHP17追記
+        $history = new History;
+        $history->news_id = $news->id;
+        //↓「Carbon」と言う日付操作ライブラリを使用して取得した日付を、HistoryモデルのEdited＿atとして記録
+        $history->edited_at = Carbon::now();
+        $history->save();
         
         return redirect('admin/news');
     }
