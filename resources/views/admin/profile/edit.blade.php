@@ -30,7 +30,7 @@
                             <input type="text" class="form-control" name="gender" value="{{ $profile_form->gender }}">
                         </div>
                     </div>
-                    <div class="form-group-row">
+                    <div class="form-group row">
                         <label class="col-md-2" for="hobby">趣味</label>
                         <div class="col-md-10">
                             <textarea class="form-control" name="hobby" rows="5">{{ $profile_form->hobby }}</textarea>
