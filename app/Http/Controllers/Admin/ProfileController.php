@@ -56,7 +56,8 @@ class ProfileController extends Controller
             abort(404);
         }
         return view('admin.profile.edit', ['profile_form' => $profile]);
-    }
+        
+        }
     
     public function update(Request $request)
     {
@@ -72,7 +73,7 @@ class ProfileController extends Controller
         $profilehistory->edited_at = Carbon::now();
         $profilehistory->save();
         
-        return redirect('admin/profile/create');
+        return redirect('admin/profile/edit');
     }
     
     public function delete(Request $request)

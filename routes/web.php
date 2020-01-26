@@ -37,9 +37,6 @@ AAAControllerのbbbというAction に渡すRoutingの設定
 */
     Route::get('XXX','AAAController@bbb');
 
-//下記を追記したらエラー解消    
-Auth::routes();
-
 //↓勝手に追加されていた　
 Auth::routes();
 
