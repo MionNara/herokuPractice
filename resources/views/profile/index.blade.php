@@ -25,7 +25,7 @@
         <div class="row">
             <div class="list-profiles col-md-12 mx-auto">
                 <div class="row">
-                    <div class="table table-light">
+                    <table class="table table-light">
                         <thead>
                             <tr>
                                 <th width="10%">ID</th>
@@ -42,7 +42,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </div>
+                    </table>
                 </div>
             </div>
         </div>
