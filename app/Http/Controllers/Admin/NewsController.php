@@ -39,7 +39,7 @@ class NewsController extends Controller
         //フォームから画像が送信されてきたら保存して$news->image_pathに画像のパスを保存する
         //issetメソッド：引数の中にデータがあるか判断するメソッド
         if (isset($form['image'])) {
-            $path = Strage::disk('s3')->putFile('/', $form['image'], 'public');
+            $path = Storage::disk('s3')->putFile('/', $form['image'], 'public');
             $news->image_path = Storage::disk('s3')->url($path);
         } else {
             $news->image_path = null;
@@ -100,8 +100,8 @@ class NewsController extends Controller
         //送信されてきたフォームデータを格納する（画像もあることを忘れずに）
         $news_form = $request->all();
         if (isset($news_form['image'])) {
-            $path = $request->file('image')->store('public/image');
-            $news->image_path = basename($path);
+            $path = Storage::disk('s3')->putFile('/', $form['image'], 'public');
+            $news->image_path = Storage::disk('s3')->url($path);
             unset($news_form['image']);
         } elseif (isset($request->remove)) {
             $news->image_path = null;
