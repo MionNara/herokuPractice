@@ -11,6 +11,7 @@ use App\News;
 use App\History;
 
 use Carbon\Carbon;
+use Storage; //heroku追加
 
 
 class NewsController extends Controller
@@ -38,8 +39,8 @@ class NewsController extends Controller
         //フォームから画像が送信されてきたら保存して$news->image_pathに画像のパスを保存する
         //issetメソッド：引数の中にデータがあるか判断するメソッド
         if (isset($form['image'])) {
-            $path = $request->file('image')->store('public/image');
-            $news->image_path = basename($path);
+            $path = Strage::disk('s3')->putFile('/', $form['image'], 'public');
+            $news->image_path = Storage::disk('s3')->url($path);
         } else {
             $news->image_path = null;
         }
